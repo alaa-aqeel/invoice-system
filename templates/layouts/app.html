@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html' %}
+
+
+{% block base %}
+
+<main class="bg-indigo-500 px-3 py-6 flex flex-row min-h-screen">
+    {% include "components/sidenav.html" %}
+    <div class="bg-white min-h-full w-full shadow-lg shadow-indigo-700 rounded-2xl">
+        {% include "components/navbar.html" %}
+        {% block content %}{% endblock %}
+    </div>
+</main>
+
+
+{% endblock %}

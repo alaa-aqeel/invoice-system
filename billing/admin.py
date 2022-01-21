@@ -1,0 +1,31 @@
+from django.contrib import admin
+from billing.models import Bill, BillProducts 
+# Register your models here.
+
+
+class ProductsInline(admin.TabularInline):
+    model = BillProducts
+    fields = ['product', 'price', 'quantity']
+    readonly_fields = ['product', 'price', 'quantity']
+    extra = 0
+    can_delete = False
+
+    def has_add_permission(self, *args, **kwargs):
+        return False
+
+@admin.register(Bill)
+class BillAdmin(admin.ModelAdmin):
+    inlines = [
+        ProductsInline,
+    ]
+
+    list_display = ['code', "total_price", 'discount', "end_price", "bill_for", "products"] 
+
+    def bill_for(self, obj):
+        return obj.other.fullname
+
+    def products(self, obj):
+        return obj.bill_products.count()
+
+    def end_price(self, obj):
+        return abs(int(obj.discount - obj.total_price))
