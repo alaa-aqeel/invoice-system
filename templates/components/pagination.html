@@ -1,0 +1,22 @@
+<div class="flex">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}&per_page={{per_page}}" class="p-1.5 px-3 hover:bg-gray-400 hover:bg-opacity-20 rounded">
+    {% else  %}
+        <a class="p-1.5 px-3 rounded text-gray-400 cursor-not-allowed">
+    {% endif %}
+
+        <span class="iconify" data-icon="ep:arrow-left-bold"></span>
+    </a>
+
+    <div class="px-2">
+        {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+    </div>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}&per_page={{per_page}}"  class="p-1.5 px-3 hover:bg-gray-400 hover:bg-opacity-20 rounded">
+    {% else  %}
+        <a class="p-1.5 px-3 rounded text-gray-400 cursor-not-allowed">
+    {% endif %}   
+        <span class="iconify" data-icon="ep:arrow-right-bold"></span>
+    </a>
+</div>

@@ -1,0 +1,46 @@
+{% load datatable %}
+
+<div class="shadow  border-gray-200 rounded-lg border-b">
+  
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-gray-50">
+      <tr>
+        {% for field in fields %}
+          <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+              {{ field }}
+          </th>
+        {% endfor %}
+        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+           actions
+        </th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+      {% for row in data %}
+        <tr>
+          {% for field in fields %}
+              <td class="px-6 py-4 whitespace-nowrap">
+                {{ row|get_attr:field }}
+              </td>
+          {% endfor %}
+          <td class="px-6 py-4 whitespace-nowrap flex gap-6">
+              <button class="text-blue-600 font-medium relative tooltip">
+                <span class="iconify" data-icon="feather:edit-2"></span>
+                <span class="absolute capitalize -top-10 tooltip-text -left-full hidden shadow-lg rounded-lg z-50 bg-gray-900 px-4 p-1 text-white">
+                    Edit 
+                </span>
+              </button>
+              <button class="text-rose-600 font-medium relative tooltip">
+                <span class="iconify" data-icon="wpf:delete"></span>
+                <span class="absolute capitalize -top-10 tooltip-text -left-full hidden shadow-lg rounded-lg z-50 bg-gray-900 px-4 p-1 text-white">
+                    delete 
+                </span>
+              </button>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+</div>
