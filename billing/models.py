@@ -12,9 +12,12 @@ class Bill(models.Model):
     note = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    other = models.ForeignKey("others.Other", on_delete=models.CASCADE, related_name="billing")
+    account = models.ForeignKey("account.Account", on_delete=models.CASCADE, related_name="billing")
     user = models.ForeignKey(user_model, on_delete=models.CASCADE, related_name="billing")
 
+
+    def price(self):
+        return self.total_price
 
 class BillProducts(models.Model):
     """Products for bill"""

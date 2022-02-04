@@ -1,9 +1,10 @@
 <div class="py-6 px-2 flex flex-col gap-3">
-    {% include "components/tooltip.html" with text="Dashboard" link="#" icon="mdi:monitor-dashboard" %}
+    {% include "components/tooltip.html" with text="dashboard" link="#" icon="mdi:monitor-dashboard" %}
     {% include "components/tooltip.html" with text="product" link="product" icon="teenyicons:box-outline" %}
-    {% include "components/tooltip.html" with text="billing" link="#" icon="uil:bill" %}
-    {% include "components/tooltip.html" with text="customers" link="#" icon="fluent:people-20-regular" %}
-    {% include "components/tooltip.html" with text="suppliers" link="#" icon="feather:users" %}
+    {% include "components/tooltip.html" with text="billing" link="billing" icon="uil:bill" %}
+    {% include "components/tooltip.html" with text="accounts" link="account" icon="fluent:people-20-regular" %}
     <div class="flex-1"></div>
-    {% include "components/tooltip.html" with text="Setting" link="#" icon="ant-design:setting-twotone" %}
+    {% if request.user.is_superuser %}
+        {% include "components/tooltip.html" with text="Admin Panel" link="admin" icon="eos-icons:admin-outlined" %}
+    {% endif %}
 </div>

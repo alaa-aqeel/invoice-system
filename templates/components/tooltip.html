@@ -1,6 +1,22 @@
-<a href="{{ link }}" class="tooltip text-gray-200 hover:text-white relative p-3 hover:bg-indigo-600 hover:shadow-lg rounded-xl">
-    <span class="iconify w-10 h-10 " data-icon="{{ icon }}"></span>
-    <div class="tooltip-text left-full mx-3 top-1/4 absolute bg-gray-900 rounded-lg shadow p-2 hidden capitalize">
-        {{text }}
+<a 
+    href="/{{ link }}" 
+    class="
+    tooltip 
+    text-gray-200 
+    hover:text-white 
+    relative 
+    w-auto
+    p-3 
+    hover:bg-indigo-600 
+    hover:shadow-lg 
+    rounded-xl
+    {% if request.resolver_match.url_name == text  %}
+        bg-indigo-600 
+        text-white 
+    {% endif %}
+">
+    <span class="iconify w-auto h-10 " data-icon="{{ icon }}"></span>
+    <div class="tooltip-text whitespace-nowrap left-full mx-3 top-1/4 absolute bg-gray-900 rounded-lg shadow p-2 hidden capitalize">
+        {{ text }}
     </div>
 </a>

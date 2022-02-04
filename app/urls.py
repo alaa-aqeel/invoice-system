@@ -15,9 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import handler404
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("dashboard.urls")),
     path('product/', include("product.urls")),
+    path('auth/', include("authentication.urls")),
+    path('account/', include("account.urls")),
+    path('billing/', include("billing.urls")),
 ]
+
+
+handler404 = "dashboard.views.not_found_page"

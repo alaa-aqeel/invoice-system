@@ -2,15 +2,14 @@
 
 
 {% block base %}
-
-<main class="bg-indigo-400 px-3 py-6 flex flex-row min-h-screen">
+<main class="bg-indigo-400 px-4 py-6 flex flex-row min-h-screen">
     {% include "components/sidenav.html" %}
-    <div class="bg-white min-h-full w-full shadow-lg shadow-indigo-700 rounded-2xl">
+    <div class="bg-white min-h-full w-full truncate overflow-y-scroll shadow-lg shadow-indigo-700 rounded-2xl">
         {% include "components/navbar.html" %}
         <div class="p-12 w-full ">
+            
             {% block content %}{% endblock %}
         </div>
     </div>
 </main>
-
 {% endblock %}

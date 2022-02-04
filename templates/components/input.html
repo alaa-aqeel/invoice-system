@@ -1,0 +1,29 @@
+<div class="px-4 flex flex-col">
+    <label 
+        for="{{ field.name }}" 
+        class="px-1 text-gray-600 font-semibold py-1"
+    >
+        {{ field.label }}
+        {% if field.field.required %}
+           <span class="text-rose-600">*</span>
+        {% endif %}
+    </label>
+    <input 
+        class="w-full border-b bg-gray-100 py-2.5 px-4 rounded outline-none"
+        type="{{ field.field.widget.input_type }}" 
+        name={{ field.name }} 
+        id="{{ field.name }}"
+        {% if field.value %}
+            value="{{ field.value }}"
+        {% endif %}
+        placeholder="Enter {{ field.name }}"
+        {% if field.field.required %}
+            required
+        {% endif %}
+    >
+    <ul class="px-1 py-2">
+        {% for err in field.errors %}
+            <li class="text-red-500">{{ err }}</li>  
+        {% endfor %}
+    </ul>
+</div>

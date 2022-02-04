@@ -9,8 +9,8 @@ class Type(models.Model):
     def __str__(self):
         return self.name
 
-class Other(models.Model):
-    """Customer or Supplier Model"""
+class Account(models.Model):
+    """Account Model"""
     fullname = models.CharField(max_length=45)
     phone = models.CharField(max_length=20)
     address = models.CharField(max_length=255)
@@ -19,7 +19,7 @@ class Other(models.Model):
 
     # type Customer or Supplier
     type = models.ForeignKey(Type, on_delete=models.CASCADE, 
-                            related_name="others")
+                            related_name="accounts")
 
 
     def __str__(self):

@@ -1,0 +1,13 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block base %}
+    <main class="bg-indigo-400 px-4 py-6 flex items-center justify-center min-h-screen">
+        <div class="p-6 rounded-lg ">
+            <h1 class="text-5xl font-medium uppercase text-gray-200 scale-125 -rotate-12">
+                not found 
+            </h1>
+            <img src="{% static 'img/404.svg' %}" class="w-full h-full">
+        </div>
+    </main>
+{% endblock %}

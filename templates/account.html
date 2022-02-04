@@ -1,15 +1,17 @@
 {% extends 'layouts/app.html' %}
 
 {% block content %}
+    
 
 <div class="p-4 border rounded-lg">
 
     {% include "components/messages.html"   %}
 
+
     <!-- link to create page -->
     <div class="py-4 px-2 flex">
         <a 
-            href="{% url 'product_create' %}"
+            href="{% url 'account_create' %}"
             class="py-2.5 px-5 cursor-pointer bg-blue-500 text-white shadow rounded hover:bg-blue-700 active:bg-blue-500">
             Create 
         </a>
@@ -30,19 +32,19 @@
                     onchange="formSearch.submit()"
                 >
                 <select 
-                    name="category"
-                    value="{{request.GET.category}}"
+                    name="type"
+                    value="{{request.GET.type}}"
                     class="px-4 py-1.5 w-1/3  border shadow-sm outline-none"
                 >
-                    <option value="0" disabled>Select Gategory</option>
+                    <option value="0" disabled>Select Type</option>
                     <option value="" >All</option>
-                    {% for category in categories %}
-                        <option  value="{{ category.name }}" 
-                            {% if category.name == request.GET.category %} 
+                    {% for type in types %}
+                        <option  value="{{ type.name }}" 
+                            {% if type.name == request.GET.type %} 
                                 selected 
                             {% endif %}
                         > 
-                            {{ category.name }} 
+                            {{ type.name }} 
                         </option>
                     {% endfor %}
                 </select>
@@ -55,7 +57,7 @@
 
 
     <!-- Data Table to display objects -->
-    {% include "components/datatable.html"  with fields=fields data=page_obj update_link="product_update" delete_link="product_delete"  %}
+    {% include "components/datatable.html"  with fields=fields data=page_obj update_link="account_update" delete_link="account_delete"  %}
 
     <!-- Pagination -->
     <div class="container mx-auto w-full p-4">

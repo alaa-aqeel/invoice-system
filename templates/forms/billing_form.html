@@ -1,0 +1,54 @@
+{% extends 'layouts/app.html' %}
+
+{% block content %}
+<div class="container mx-auto ">
+    {% comment %} <h1 class="text-4xl  text-gray-500 py-4 uppercase flex ">
+        <span class="iconify" data-icon="clarity:form-line"></span>
+        form billing 
+    </h1> {% endcomment %}
+
+    <div class="flex gap-2 h-full">
+        <div class="h-full">
+
+        </div>
+        <div class="flex-1"></div>
+        <div class="h-full p-2 rounded flex flex-col">
+            <div class="flex flex-col">
+                <input 
+                    name="product" 
+                    value=""
+                    placeholder="Search Products" 
+                    type="text" 
+                    class="w-full border-b bg-gray-100 py-2.5 px-4 rounded outline-none"
+                    autocomplete="off"
+                >
+            </div>
+            <div class="py-6">
+                <ul class="overflow-y-scroll h-96 px-1 py-1">
+                    {% for product in products  %}
+                        <li class="py-2 px-3 flex flex-col hover:bg-gray-100 rounded cursor-pointer select-none">
+                            {{ product.name }}
+                            <span class="text-sm text-gray-400 -mt-1">have {{ product.quantity }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    {% comment %} <form method="POST"  >
+        <!-- Security token -->
+        {% csrf_token %}
+      
+        <!-- Using the formset -->
+        {% include "components/input.html"  with field=form.code   %}
+        {% include "components/input.html"  with field=form.price   %}
+        {% include "components/input.html"  with field=form.discount   %}
+        {% include "components/textarea.html"  with field=form.note   %}
+        {% include "components/select.html"  with field=form.account   %}
+          
+        {% include "components/submit.html"  with text='Save' %}
+    </form>  {% endcomment %}
+</div>   
+{% endblock  %}

@@ -1,0 +1,29 @@
+{% extends 'layouts/app.html' %}
+
+{% block content %}
+
+<div class="p-4 border rounded-lg">
+
+    {% include "components/messages.html"   %}
+
+    <div class="py-4 px-2 flex">
+        <a 
+            href="{% url 'billing_create' %}"
+            class="py-2.5 px-5 cursor-pointer bg-blue-500 text-white shadow rounded hover:bg-blue-700 active:bg-blue-500">
+            Create 
+        </a>
+    </div
+
+    <!-- Data Table to display objects -->
+    {% include "components/datatable.html"  with fields=fields data=page_obj update_link="product_update" delete_link="product_delete"  %}
+
+    <!-- Pagination -->
+    <div class="container mx-auto w-full p-4">
+        <div class="p-3 w-full rounded-xl  flex justify-end items-center">
+            {% include "components/pagination.html" with pgae_obj=data %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock  %}

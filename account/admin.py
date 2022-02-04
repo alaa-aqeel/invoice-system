@@ -1,9 +1,9 @@
 from django.contrib import admin
-from others.models  import Other, Type
+from account.models  import Account, Type
 # Register your models here.
 
-@admin.register(Other)
-class OtherAdmin(admin.ModelAdmin):
+@admin.register(Account)
+class AccountAdmin(admin.ModelAdmin):
 
     list_display = ['fullname', "type", "phone", "address"] 
 
@@ -14,4 +14,4 @@ class TypeAdmin(admin.ModelAdmin):
     list_display = ['name', "count"] 
 
     def count(self, obj):
-        return obj.others.count()
+        return obj.accounts.count()

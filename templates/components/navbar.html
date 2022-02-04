@@ -1,12 +1,28 @@
-<div class="w-full p-2 my-2 px-12">
+{% load datatable %}
+
+<div class="w-full p-2 my-2 px-12 shadow">
     <div class="flex items-center">
-        <a href="/" class="text-xl font-mono uppercase">
-            Invoice 
-        </a>
+        <div class="flex items-center gap-3">
+            <a href="/" class="text-xl font-mono uppercase text-gray-700">
+                <span class="iconify" data-icon="fa-solid:home"></span>
+            </a>
+            {% for key, value in  request.path|create_bread %}
+                {% if key %}
+                    <a href="{{ value }}" class="text-xl font-mono uppercase text-gray-700">
+                        > {{ key }} 
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
         <div class="flex-1"></div>
         <div class="flex gap-3">
-            <a href="#" class="bg-indigo-400 active:bg-indigo-500 hover:shadow text-white px-4 py-2 rounded-lg font-semibold">
+            <a href="#" class="flex gap-1 items-center hover:bg-indigo-500 hover:shadow hover:text-white px-4 py-2 rounded-lg font-semibold">
+                <span class="iconify" class="text-4xl" data-icon="bx:bxs-user"></span>
                 {{ request.user.username }}
+            </a>
+            <a href="#" class="flex gap-1 items-center ac px-4 py-2 rounded-lg border font-semibold">
+                <span class="iconify w-5 h-5" data-icon="ri:logout-circle-r-line"></span>
+                {% comment %} Logout {% endcomment %}
             </a>
         </div>
     </div>

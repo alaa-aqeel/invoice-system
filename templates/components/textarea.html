@@ -1,0 +1,25 @@
+<div class="px-4 py-2 flex flex-col">
+    <label 
+        for="{{ field.name }}" 
+        class="px-1 text-gray-600 font-semibold py-1"
+    >
+        {{ field.label }}
+        {% if field.field.required %}
+           <span class="text-rose-600">*</span>
+        {% endif %}
+    </label>
+    <textarea
+        {% if field.field.required %}
+        required
+        {% endif %}
+        class="w-full border-b bg-gray-100 py-2.5 px-4 rounded outline-none"
+        name="{{ field.name }}" 
+        id="{{ field.name }}"
+        placeholder="{{ field.name }}"
+    >{% if field.value %}{{ field.value }}{% endif %}</textarea>
+    <ul class="px-1 py-2">
+        {% for err in field.errors %}
+            <li class="text-red-500">{{ err }}</li>  
+        {% endfor %}
+    </ul>
+</div>
