@@ -7,7 +7,7 @@ user_model = get_user_model()
 class Bill(models.Model):
     """Billing Model"""
     code = models.CharField(max_length=255)
-    total_price = models.IntegerField()
+    total_price = models.IntegerField(default=0)
     discount = models.IntegerField(default=0)
     note = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -15,7 +15,7 @@ class Bill(models.Model):
     account = models.ForeignKey("account.Account", on_delete=models.CASCADE, related_name="billing")
     user = models.ForeignKey(user_model, on_delete=models.CASCADE, related_name="billing")
 
-
+    @property
     def price(self):
         return self.total_price
 

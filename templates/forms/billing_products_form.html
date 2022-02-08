@@ -1,0 +1,22 @@
+{% extends 'layouts/app.html' %}
+
+{% block content %}
+<div class="container mx-auto">
+    <h1 class="text-4xl  text-gray-500 py-4 uppercase flex ">
+        <span class="iconify" data-icon="clarity:form-line"></span>
+        Select Products for Bill  account 
+    </h1>
+    <form method="POST"  >
+        <!-- Security token -->
+        {% csrf_token %}
+      
+        <!-- Using the formset -->
+        {% include "components/select.html"  with field=form.product   %}
+        {% comment %} {% include "components/select.html"  with field=form.price   %} {% endcomment %}
+        {% include "components/input.html"  with field=form.quantity   %}
+        {% include "components/textarea.html"  with field=form.note   %}
+          
+        {% include "components/submit.html"  with text='Save' %}
+    </form> 
+</div>   
+{% endblock  %}

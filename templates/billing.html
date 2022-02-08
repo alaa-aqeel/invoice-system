@@ -15,11 +15,11 @@
     </div
 
     <!-- Data Table to display objects -->
-    {% include "components/datatable.html"  with fields=fields data=page_obj update_link="product_update" delete_link="product_delete"  %}
+    {% include "components/datatable.html"  with fields=fields data=page_obj update_link="billing_update" delete_link="billing_delete"  %}
 
     <!-- Pagination -->
     <div class="container mx-auto w-full p-4">
-        <div class="p-3 w-full rounded-xl  flex justify-end items-center">
+        <div class="p-3 w-full rounded-xl  flex items-center">
             {% include "components/pagination.html" with pgae_obj=data %}
         </div>
     </div>

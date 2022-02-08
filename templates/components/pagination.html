@@ -1,4 +1,8 @@
-<div class="flex items-center">
+<div class="flex items-center w-full">
+    <div class="flex-1">
+        Showing {{ page_obj.start_index }}-{{ page_obj.end_index }} of {{ page_obj.paginator.count }}
+    </div>
+    <div class="flex-1"></div>
     <form name="perPage" class="flex flex-row items-center justify-center gap-2 p-1.5 px-1">
         <label for="per_page " class="inline-block">Per page: </label>
         <select onchange="perPage.submit()" name="per_page" class="rounded-md bg-white shadow  py-[3px] px-2">
