@@ -9,4 +9,3 @@ Management system to a product , accounts and invoices with Django and Tailwind 
 5) `~# python manage.py makemigrations`
 6) `~# python manage.py migrate`
 7) `~# python manage.py runserver`
-
