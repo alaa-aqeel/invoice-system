@@ -35,6 +35,7 @@ MESSAGE_TAGS = {
     messages.ERROR : 'bg-red-600 text-white',
 }
 
+
 # Application definition
 
 INSTALLED_APPS = [

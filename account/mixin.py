@@ -21,11 +21,10 @@ class AccountMixinView(SuccessMessageMixin):
         "fullname", 
         'phone', 
         'address', 
+        'type',
         "note", 
-        'type'
     ]
 
     def get_success_message(self, cleaned_data):
         """Get message successfuly """
-        
         return self.success_message % dict(fullname=self.object.fullname)

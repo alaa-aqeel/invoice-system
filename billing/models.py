@@ -1,14 +1,15 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from datetime import date 
 
 user_model = get_user_model()
 
 # Create your models here.
 class Bill(models.Model):
     """Billing Model"""
-    code = models.CharField(max_length=255)
+    number = models.CharField(max_length=255, null=True, blank=True)
     total_price = models.IntegerField(default=0)
-    discount = models.IntegerField(default=0)
+    discount = models.IntegerField(default=0, null=True, blank=True)
     note = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -18,6 +19,14 @@ class Bill(models.Model):
     @property
     def price(self):
         return self.total_price
+    
+
+    @property
+    def created_at_date(self):
+        return self.created_at.strftime('%Y-%m-%d')
+
+
+
 
 class BillProducts(models.Model):
     """Products for bill"""

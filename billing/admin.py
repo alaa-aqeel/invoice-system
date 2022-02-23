@@ -19,7 +19,7 @@ class BillAdmin(admin.ModelAdmin):
         ProductsInline,
     ]
 
-    list_display = ['code', "total_price", 'discount', "end_price", "bill_for", "products"] 
+    list_display = ['number', "total_price", 'discount', "end_price", "bill_for", "products"] 
 
     def bill_for(self, obj):
         return obj.other.fullname

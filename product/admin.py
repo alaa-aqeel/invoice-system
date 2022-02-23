@@ -5,14 +5,13 @@ from product.models import Product, Category
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
 
-    list_display = ['name', "category", "price", "quantity"]
-    pass 
+    list_display = ['name', "selling_price", "purchasing_price", "category", "quantity"] 
 
 
 class ProductInline(admin.TabularInline):
     model = Product
-    fields = ['name', 'price', 'quantity', 'user']
-    readonly_fields = ["name", 'price', 'quantity', 'user']
+    fields = ['name', "selling_price", "purchasing_price", 'quantity', 'user']
+    readonly_fields = ["name", "selling_price", "purchasing_price", 'quantity', 'user']
     extra = 0
     can_delete = False
 

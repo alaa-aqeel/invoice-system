@@ -6,12 +6,67 @@
 
     {% include "components/messages.html"   %}
 
-    <div class="py-4 px-2 flex">
-        <a 
-            href="{% url 'billing_create' %}"
-            class="py-2.5 px-5 cursor-pointer bg-blue-500 text-white shadow rounded hover:bg-blue-700 active:bg-blue-500">
-            Create 
-        </a>
+    <div class="py-4 px-2 flex items-center">
+        <div>
+            <a 
+                href="{% url 'billing_create' %}"
+                class="py-2.5 px-5 cursor-pointer bg-blue-500 text-white shadow rounded hover:bg-blue-700 active:bg-blue-500">
+                Create 
+            </a>
+        </div>
+        <div class="w-full">
+            <form class="flex w-full items-center" name="formSearch">
+                <div class="flex-1"></div>
+                {% if request.GET.search %}
+                    <div class="flex flex-col ">   
+                        <a href="{% url 'billing' %}" class="mt-6 px-4 py-1.5 shadow bg-blue-500 text-white  hover:bg-blue-700 active:bg-blue-500">
+                            <span class="iconify w-6 h-6" data-icon="ion:refresh-sharp"></span>
+                        </a>
+                    </div>
+                {% endif %}
+                
+                <div class="flex flex-col w-1/2 ">
+                    <label for="date_stat">Search</label>
+                    <input 
+                        name="search" 
+                        value="{{request.GET.search}}"
+                        placeholder="Filter by Number, Account, User" 
+                        type="text" 
+                        class="px-4 w-full py-1.5  border shadow-sm outline-none" 
+                        onchange="formSearch.submit()"
+                    >
+                </div>
+                <div class="flex ">
+                    <div class="flex flex-col">
+                        <label for="date_stat">Date From</label>
+                        <input 
+                            name="date_start" 
+                            value="{{request.GET.date_start}}"
+                            type="date" 
+                            class="px-4 w-full py-1.5  border shadow-sm outline-none" 
+                            onchange="formSearch.submit()"
+                        >
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="date_stat">Date To</label>
+                        <input 
+                            name="date_end" 
+                            value="{{request.GET.date_end}}"
+                            type="date" 
+                            class="px-4 w-full py-1.5  border shadow-sm outline-none" 
+                            onchange="formSearch.submit()"
+                        >
+                    </div>
+                </div>
+
+               <div class="flex flex-col items-end">
+                    <div class="p-3"></div>
+                    <button class="px-4 py-1.5 shadow bg-blue-500 text-white  hover:bg-blue-700 active:bg-blue-500">
+                        <span class="iconify w-6 h-6" data-icon="dashicons:search" ></span>
+                    </button>
+               </div>
+            </form>
+        </div>
     </div
 
     <!-- Data Table to display objects -->

@@ -2,17 +2,19 @@
 
 {% block content %}
 <div class="container mx-auto">
-
-    <form method="POST"  >
+    <form name="form-billing" method="POST"  >
         <!-- Security token -->
         {% csrf_token %}
 
         <div class="flex gap-2 flex-row w-full items-center">  
             {% include "components/select.html"  with field=form.account   %}
-            {% include "components/input.html"  with field=form.code   %}
+            {% include "components/input.html"  with field=form.number   %}
             {% include "components/input.html"  with field=form.discount   %}
             
         </div>
+        {% include "components/textarea.html"  with field=form.note   %}
+        {% include "components/submit.html"  with text='Save' %}
+    </form> 
         {% if object.id %}
             <div class="px-4 w-full">
                 <div class="flex items-center justify-end w-full p-2">
@@ -23,20 +25,16 @@
                     </a>
                 </div>
                 {% include "components/datatable.html"  with parentId=object.id fields=fields  data=bill_products update_link="billing_products_update" delete_link="billing_products_delete"   %}
-                {% if total_price %}
+                {% if total_price_of_products %}
                     <div class="p-6 border-t text-xl w-full shadow rounded flex">
                         <div class="flex-1"></div>
                         <h1>
-                            Total Price: <strong>{{ total_price }}$</strong>
+                            Total Price: {{ total_price_of_products }}$ <strong>-</strong> {{ billing.discount }}$ = <strong>{{ billing.price }}$</strong>
                         </h1>
                     </div>
                 {% endif %}
                 
             </div> 
         {% endif %}
-        {% include "components/textarea.html"  with field=form.note   %}
-          
-        {% include "components/submit.html"  with text='Save' %}
-    </form> 
 </div>   
 {% endblock  %}

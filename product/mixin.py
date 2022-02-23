@@ -19,7 +19,8 @@ class ProductMixinView(SuccessMessageMixin):
     # form fields 
     fields: list = [
         "name", 
-        'price', 
+        'purchasing_price', 
+        'selling_price', 
         'quantity',
         'note', 
         "category",

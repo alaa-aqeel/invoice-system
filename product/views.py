@@ -17,7 +17,8 @@ class ProductListView(ListView):
     fields: list = [
         "id", 
         "name", 
-        'price', 
+        'selling_price', 
+        'purchasing_price',
         'quantity', 
         "category", 
         'user'
@@ -25,20 +26,16 @@ class ProductListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-
         # filter by name proudct 
         queryset = queryset.filter(name__contains=self.request.GET.get("search", ''))
-
         # filter by categroy of product 
         if self.request.GET.get("category"):
             queryset = queryset.filter(category__name__contains=self.request.GET.get("category", ''))
         return queryset.order_by("-created_at")
 
     def get_context_data(self, **kwargs: dict):
-
         # limit 
         self.paginate_by = self.request.GET.get("per_page", self.paginate_by)
-
         context = super().get_context_data(**kwargs)
         context['fields'] = self.fields # set field names in response 
         context['per_page'] = self.paginate_by # set per_page in response 

@@ -17,7 +17,8 @@ class Category(models.Model):
 class Product(models.Model):
     """Product Model"""
     name = models.CharField(max_length=255)
-    price = models.IntegerField()
+    selling_price = models.IntegerField()
+    purchasing_price = models.IntegerField()
     quantity = models.IntegerField()
     note = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -15,9 +15,9 @@ class AccountListView(ListView):
         "id", 
         "fullname", 
         'phone', 
-        'address', 
-        "note", 
-        'type'
+        'address',
+        'type',
+        "balance",
     ]
 
     def get_queryset(self):

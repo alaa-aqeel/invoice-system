@@ -5,7 +5,8 @@ from account.models  import Account, Type
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
 
-    list_display = ['fullname', "type", "phone", "address"] 
+    list_display = ['fullname', "type", "phone", "address", "balance"] 
+    readonly_fields = ['balance']
 
 
 @admin.register(Type)

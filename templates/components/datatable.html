@@ -54,13 +54,13 @@
                 <!-- delete action -->
                 {% if delete_link %}
                   
-                  <form method="POST" 
+                  <form 
                     {% if parentId %}
                       action="{% url delete_link parentId row.id %}"
                     {% else %}
                       action="{% url delete_link row.id %}"
                     {% endif %}
-                  >
+                    method="POST" >
                     {% csrf_token %}
                     <button class="text-rose-600 font-medium relative tooltip">
                       <span class="iconify" data-icon="wpf:delete"></span>
@@ -69,6 +69,7 @@
                       </span>
                     </button>
                   </form>
+
                 {% endif %}
             </td>
           </tr>
@@ -82,6 +83,4 @@
       {% endif %}
     </tbody>
   </table>
-
-  
 </div>

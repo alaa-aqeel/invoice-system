@@ -12,7 +12,7 @@
       
         <!-- Using the formset -->
         {% include "components/select.html"  with field=form.product   %}
-        {% comment %} {% include "components/select.html"  with field=form.price   %} {% endcomment %}
+
         {% include "components/input.html"  with field=form.quantity   %}
         {% include "components/textarea.html"  with field=form.note   %}
           
@@ -20,3 +20,34 @@
     </form> 
 </div>   
 {% endblock  %}
+
+
+{% block javascript %}
+{% comment %} <script >
+window.onload = ()=> {
+    // Get products from django to  js 
+    let products = [
+        {% for product in form.product.field.queryset  %}
+            {
+                id: {{ product.id }},
+                name: '{{ product.name }}',
+                quantity: {{ product.quantity }},
+            },
+        {% endfor %}
+    ]
+    let selectProduct = document.querySelector("select[name='product']")
+    let inputQuantity = document.querySelector("input[name='quantity']")
+
+    function setMaxValueForQuantityInput(target) {
+        let product = products.find(product=> target.value == product.id )
+        if (product != null) {
+            inputQuantity.max =  product.quantity
+        }
+    }
+
+    // init 
+    setMaxValueForQuantityInput(selectProduct)
+    selectProduct.onchange = event => setMaxValueForQuantityInput(event.target)
+}
+</script> {% endcomment %}
+{% endblock javascript %}
