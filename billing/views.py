@@ -1,6 +1,8 @@
 from django.db.models import Q
 from django.forms import ValidationError
+from django.http import HttpResponseRedirect
 from django.db.models import Sum
+from datetime import datetime
 from django.views.generic import ListView
 from django.urls import reverse_lazy, reverse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -23,9 +25,10 @@ class BillingListView(ListView):
         'number',
         'price',
         "discount",
-        "created_at_date",
         "account",
-        "user"
+        "user",
+        "canceled_date",
+        "created_date",
     ]
 
     def get_queryset(self) :
@@ -139,8 +142,14 @@ class BillDeleteView(DeleteView):
             product.save()
 
     def dispatch(self, request, *args, **kwargs):
+        current_object = self.get_object()
         self.update_quantity_product()
-        return super().dispatch(request, *args, **kwargs)
+        current_object.deleted_at = datetime.now()
+        current_object.save()
+        return HttpResponseRedirect(self.get_success_url())
+        
+
+
 
 class BillProductCreateView(CreateView):
 

@@ -19,10 +19,10 @@ class BillAdmin(admin.ModelAdmin):
         ProductsInline,
     ]
 
-    list_display = ['number', "total_price", 'discount', "end_price", "bill_for", "products"] 
+    list_display = ['number', "total_price", 'discount', "end_price", "bill_for", "products", "created_at", "canceled_at"] 
 
     def bill_for(self, obj):
-        return obj.other.fullname
+        return obj.account.fullname
 
     def products(self, obj):
         return obj.bill_products.count()

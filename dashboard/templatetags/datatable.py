@@ -16,3 +16,7 @@ def create_bread(path: str) -> dict:
         bard.update({path: "#"})
 
     return bard.items()
+
+@register.filter
+def correct_name(name: str) -> str:
+    return str(" ".join(name.split("_"))).upper()
