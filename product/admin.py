@@ -5,13 +5,31 @@ from product.models import Product, Category
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
 
-    list_display = ['name', "selling_price", "purchasing_price", "category", "quantity"] 
+    list_display = [
+        'name', 
+        "selling_price", 
+        "purchasing_price", 
+        "category", 
+        "quantity"
+    ] 
 
 
 class ProductInline(admin.TabularInline):
     model = Product
-    fields = ['name', "selling_price", "purchasing_price", 'quantity', 'user']
-    readonly_fields = ["name", "selling_price", "purchasing_price", 'quantity', 'user']
+    fields = [
+        'name', 
+        "selling_price", 
+        "purchasing_price", 
+        'quantity', 
+        'user'
+    ]
+    readonly_fields = [
+        "name", 
+        "selling_price", 
+        "purchasing_price", 
+        'quantity', 
+        'user'
+    ]
     extra = 0
     can_delete = False
 
@@ -25,7 +43,10 @@ class CategroyAdmin(admin.ModelAdmin):
         ProductInline,
     ]
 
-    list_display = ['name', "products"] 
+    list_display = [
+        'name', 
+        "products"
+    ] 
 
     def products(self, obj):
         return obj.products.count()

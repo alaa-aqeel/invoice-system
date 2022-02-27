@@ -1,0 +1,53 @@
+{% extends 'layouts/app.html' %}
+
+{% block content %}
+    
+
+<div class="p-4 border rounded-lg">
+
+    {% include "components/messages.html"   %}
+
+    <!-- link to create page -->
+    <div class="py-4 px-2 flex">
+        <a 
+            href="{% url 'debts_create' %}"
+            class="py-2.5 px-5 cursor-pointer bg-blue-500 text-white shadow rounded hover:bg-blue-700 active:bg-blue-500">
+            Create 
+        </a>
+        <div class="flex-1"></div>
+        <div class="w-1/2">
+            <form class="flex" name="formSearch">
+                {% if request.GET.search %}
+                    <a href="{% url 'debts' %}" class="px-4 py-1.5 shadow bg-blue-500 text-white  hover:bg-blue-700 active:bg-blue-500">
+                        <span class="iconify w-6 h-6" data-icon="ion:refresh-sharp"></span>
+                    </a>
+                {% endif %}
+                <input 
+                    name="search" 
+                    value="{{request.GET.search}}"
+                    placeholder="Search" 
+                    type="text" 
+                    class="px-4 w-full py-1.5  border shadow-sm outline-none" 
+                    onchange="formSearch.submit()"
+                >
+                <button class="px-4 py-1.5 shadow bg-blue-500 text-white  hover:bg-blue-700 active:bg-blue-500">
+                    <span class="iconify w-6 h-6" data-icon="dashicons:search" ></span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Data Table to display objects -->
+    {% include "components/datatable.html"  with fields=fields data=page_obj update_link="debts_update" delete_link="debts_delete"  %}
+
+    <!-- Pagination -->
+    <div class="container mx-auto w-full p-4">
+        <div class="p-3 w-full rounded-xl  flex items-center">
+            {% include "components/pagination.html" with pgae_obj=data %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock  %}

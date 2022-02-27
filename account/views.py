@@ -17,27 +17,24 @@ class AccountListView(ListView):
         'phone', 
         'address',
         'type',
+        "debt",
+        "paid",
         "balance",
     ]
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-
+        queryset = super().get_queryset().order_by("id")
         # filter by fullname 
         queryset = queryset.filter(fullname__contains=self.request.GET.get("search", ''))
-
-       
         if self.request.GET.get("type"):
             # filter by type account 
             queryset = queryset.filter(type__name__contains=self.request.GET.get("type", ''))
-        
+            
         return queryset
 
     def get_context_data(self, **kwargs: dict):
-
         # limit page 
         self.paginate_by = self.request.GET.get("per_page", self.paginate_by)
-
         context = super().get_context_data(**kwargs)
         context['fields'] = self.fields # set field names 
         context['per_page'] = self.paginate_by # set per_page 
@@ -45,26 +42,24 @@ class AccountListView(ListView):
 
         return context
     
-class AccountCreateView(AccountMixinView, CreateView) :
+class AccountCreateView(AccountMixinView, CreateView) : 
     """Create new Account"""
-
     success_message = "Account %(fullname)s was created successfully"
 
-    def form_valid(self, form):
-        
+    def form_valid(self, form): #{ 
         # set current user 
         form.instance.user = self.request.user
         return super().form_valid(form)
+    # }
 
     
 
 class AccountUpdateView(AccountMixinView, UpdateView):
     """update Account by id"""
-
     success_message = "Account %(fullname)s was updated successfully"
 
 
-class AccountDeleteView(AccountMixinView, DeleteView):
-    """Delete Account by id"""
 
+class AccountDeleteView(AccountMixinView, DeleteView): 
+    """Delete Account by id"""
     success_message = "Account %(fullname)s was deleted successfully"

@@ -4,9 +4,18 @@ from billing.models import Bill, BillProducts
 
 
 class ProductsInline(admin.TabularInline):
+
     model = BillProducts
-    fields = ['product', 'price', 'quantity']
-    readonly_fields = ['product', 'price', 'quantity']
+    fields = [
+        'product', 
+        'price', 
+        'quantity'
+    ]
+    readonly_fields = [
+        'product', 
+        'price', 
+        'quantity'
+    ]
     extra = 0
     can_delete = False
 
@@ -15,12 +24,23 @@ class ProductsInline(admin.TabularInline):
 
 @admin.register(Bill)
 class BillAdmin(admin.ModelAdmin):
+
+    list_display = [
+        'number', 
+        "total_price", 
+        'discount', 
+        "end_price", 
+        "bill_for", 
+        "products", 
+        "created_at", 
+        "canceled_at"
+    ] 
+
     inlines = [
         ProductsInline,
     ]
 
-    list_display = ['number', "total_price", 'discount', "end_price", "bill_for", "products", "created_at", "canceled_at"] 
-
+    
     def bill_for(self, obj):
         return obj.account.fullname
 

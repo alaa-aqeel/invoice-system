@@ -12,26 +12,18 @@ class LoginView(View):
     
     def get(self, request):
         """Dispaly login page"""
-
-        # render login template 
         return render(request, "login.html", {"form": forms.AuthenticationForm})
 
-    def post(self, request):
-        """Post login"""
-        # get username and password 
+    def post(self, request):# {
+        """Post login""" 
         username = request.POST.get("username")
         password = request.POST.get('password')
-
         # Check and get user by username and password 
         user = authenticate(username=username, password=password)
-        if user is not None:
-            # create login session for user 
+        if user is not None: 
             login(request, user)
-
-            # redirect to dashboard 
             return redirect(reverse("dashboard"))
         # flash message 
         messages.error(request, "Username or Password is incorect !!")
-
-        # back to login page 
         return redirect(reverse("login"))
+    # }
