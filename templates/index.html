@@ -3,4 +3,49 @@
 
 {% block content %}
 
+<div> 
+    <canvas id="myChart" class="w-96"></canvas>
+</div>
+    
+
+<div class="flex gap-2">
+    <div class="w-full shadow rounded-lg">
+        <h1 class="text-xl p-4 font-bold">Account Balance</h1>
+        {% include "components/datatable.html"  with fields=fields_accounts data=accounts  %}
+    </div>
+    <div class="w-full">
+        <h1 class="text-xl p-4 font-bold">Count Type Account</h1>
+        {% include "components/datatable.html"  with fields=fields_accounts_type data=accounts_type  %}
+    </div>
+
+</div>
+
+
+{% endblock  %}
+
+{% block javascript %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script>
+new Chart("myChart", {
+    type: "bar",
+    data: {
+        labels: [
+            "0000-00",
+            {% for bill in billing %}
+                "{{bill.created_at__year }}-{{ bill.created_at__month }}",
+            {% endfor %}
+        ],
+        datasets: [{
+            backgroundColor: "rgba(2,0,0,1.0)",
+            data: [
+                0,
+                {% for bill in billing %}
+                    {{bill.count }},
+                {% endfor %}
+            ]
+        }]
+    },
+});
+</script>
 {% endblock  %}

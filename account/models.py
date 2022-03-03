@@ -21,6 +21,8 @@ class Account(models.Model):
     type = models.ForeignKey(Type, on_delete=models.CASCADE, 
                             related_name="accounts")
 
+
+
     @property
     def debt(self):
         """Get total debts"""

@@ -13,17 +13,19 @@
           </th>
         {% endfor %}
 
-        <!-- for actions  -->
-        <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
-           actions
-        </th>
+        {% if update_link or delete_link %}
+          <!-- for actions  -->
+          <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+            actions
+          </th>
+        {% endif %}
       </tr>
     </thead>
 
     <!-- Rows -->
     <tbody class="bg-white divide-y divide-gray-200">
       <!-- Iterate over data rows -->
-      {% if  data.count or data.paginator.count %}
+      {% if  data.count or data.paginator.count or data %}
         {% for row in data %}
           <tr>
             <!-- Iterate over field names -->
@@ -33,45 +35,48 @@
                   {{ row|get_attr:field }}
                 </td>
             {% endfor %}
-            <!-- Actions delete, update -->
-            <td class="px-6 py-4 whitespace-nowrap flex gap-6">
-              <!-- update action  -->
-                {% if update_link %}
-                  <a 
-                    {% if parentId %}
-                      href="{% url update_link parentId row.id %}"
-                    {% else %}
-                      href="{% url update_link row.id %}"
-                    {% endif %}
-                    class="text-blue-600 font-medium relative tooltip cursor-pointer"
-                  >
-                    <span class="iconify" data-icon="feather:edit-2"></span>
-                    <span class="absolute capitalize -top-10 tooltip-text -left-full hidden shadow-lg rounded-lg z-50 bg-gray-900 px-4 p-1 text-white">
-                        Edit 
-                    </span>
-                  </a>
-                {% endif %}
-                <!-- delete action -->
-                {% if delete_link %}
-                  
-                  <form 
-                    {% if parentId %}
-                      action="{% url delete_link parentId row.id %}"
-                    {% else %}
-                      action="{% url delete_link row.id %}"
-                    {% endif %}
-                    method="POST" >
-                    {% csrf_token %}
-                    <button class="text-rose-600 font-medium relative tooltip">
-                      <span class="iconify" data-icon="wpf:delete"></span>
-                      <span class="absolute capitalize -top-10 tooltip-text -left-full hidden shadow-lg rounded-lg z-50 bg-gray-900 px-4 p-1 text-white">
-                          delete 
-                      </span>
-                    </button>
-                  </form>
 
-                {% endif %}
-            </td>
+            {% if update_link or delete_link %}
+              <!-- Actions delete, update -->
+              <td class="px-6 py-4 whitespace-nowrap flex gap-6">
+                <!-- update action  -->
+                  {% if update_link %}
+                    <a 
+                      {% if parentId %}
+                        href="{% url update_link parentId row.id %}"
+                      {% else %}
+                        href="{% url update_link row.id %}"
+                      {% endif %}
+                      class="text-blue-600 font-medium relative tooltip cursor-pointer"
+                    >
+                      <span class="iconify" data-icon="feather:edit-2"></span>
+                      <span class="absolute capitalize -top-10 tooltip-text -left-full hidden shadow-lg rounded-lg z-50 bg-gray-900 px-4 p-1 text-white">
+                          Edit 
+                      </span>
+                    </a>
+                  {% endif %}
+                  <!-- delete action -->
+                  {% if delete_link %}
+                    
+                    <form 
+                      {% if parentId %}
+                        action="{% url delete_link parentId row.id %}"
+                      {% else %}
+                        action="{% url delete_link row.id %}"
+                      {% endif %}
+                      method="POST" >
+                      {% csrf_token %}
+                      <button class="text-rose-600 font-medium relative tooltip">
+                        <span class="iconify" data-icon="wpf:delete"></span>
+                        <span class="absolute capitalize -top-10 tooltip-text -left-full hidden shadow-lg rounded-lg z-50 bg-gray-900 px-4 p-1 text-white">
+                            delete 
+                        </span>
+                      </button>
+                    </form>
+
+                  {% endif %}
+              </td>
+            {% endif %}
           </tr>
         {% endfor %}
       {% else %}
