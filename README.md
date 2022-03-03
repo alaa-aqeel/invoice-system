@@ -1,4 +1,4 @@
-# iBilling `Under Development`
+# iBilling System
 Management system to a product , accounts and invoices with Django and Tailwind CSS
 
 
